@@ -1,30 +1,4 @@
-FROM ubuntu:xenial-20210804
-
-COPY apt-conf /etc/apt/apt.conf.d/
-
-RUN apt-get update -y && \
-    apt install -y \
-    build-essential \
-    apt-transport-https \
-    wget \
-    autoconf \
-    make \
-    libiberty-dev \
-    python3 \
-    python3-pip && \
-    rm -rf /var/lib/apt/lists/*
-
-RUN wget https://github.com/distcc/distcc/releases/download/v3.4/distcc-3.4.tar.gz && \
-    tar -xvf distcc-3.4.tar.gz
-
-WORKDIR /distcc-3.4
-
-RUN ./autogen.sh && \
-    ./configure && \
-    make clean && \
-    make && \
-    make install &&  \
-    make check
+FROM distcc/clang-3.8
 
 RUN useradd distcc
 
