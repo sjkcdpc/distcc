@@ -1,4 +1,6 @@
 # 概述
+一款分布式C/C++编译器，它能有效地利用网络中多台计算机的计算资源来加速编译过程。尤其在处理大型项目时，DistCC的优势更为明显。此外，DistCC还配备了一款直观的监控工具，可实时追踪编译任务的状态，包括进度与资源使用情况等关键信息。
+
 # 部署
 ```shell
 
@@ -75,5 +77,7 @@ dcc_free_space 193078 MB
 > - cpp: 使能distcc-pump mode,与pump mode 有关
 
 # 参考资料
+- https://www.distcc.org/
 - https://hub.docker.com/r/ksmanis/gentoo-distcc
 - https://mp.weixin.qq.com/s/cwUFq9lcNtiWn_Ro_tw0fw
+- https://linux.die.net/man/1/distccd
