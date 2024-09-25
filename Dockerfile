@@ -1,8 +1,8 @@
-FROM ubuntu:latest
+FROM ubuntu:xenial-20210804
 
-RUN apt-get update
+COPY apt-conf /etc/apt/apt.conf.d/
 
-RUN apt upgrade -y && \
+RUN apt-get update -y && \
     apt install -y \
     build-essential \
     apt-transport-https \
