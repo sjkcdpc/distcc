@@ -76,6 +76,13 @@ dcc_free_space 193078 MB
 > - lzo: 允许LZO压缩
 > - cpp: 使能distcc-pump mode,与pump mode 有关
 
+# 应用场景
+- 适用于大型项目编译
+
+# to-do-list
+- [ ] andriod编译
+
+
 # 参考资料
 - https://www.distcc.org/
 - https://hub.docker.com/r/ksmanis/gentoo-distcc
