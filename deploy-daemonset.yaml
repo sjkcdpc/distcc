@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: distcc
+  labels:
+    app.k8s.io/name: distcc
+spec:
+  selector:
+    matchLabels:
+      app.k8s.io/name: distcc
+  template:
+    metadata:
+      labels:
+        app.k8s.io/name: distcc
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: distcc
+        image: matthewzhaocc/distcc:latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 500Mi
+        ports:
+        - containerPort: 3632
+          hostPort: 3632
+          protocol: TCP
