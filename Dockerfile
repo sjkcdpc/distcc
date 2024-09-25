@@ -8,6 +8,7 @@ RUN apt upgrade -y && \
     apt-transport-https \
     wget \
     autoconf \
+    make \
     libiberty-dev \
     python3 \
     python3-pip && \
