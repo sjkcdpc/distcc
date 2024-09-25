@@ -1,30 +1,46 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: distcc
   labels:
-    app.k8s.io/name: distcc
+    app: distcc
+  name: distcc
 spec:
   selector:
     matchLabels:
-      app.k8s.io/name: distcc
+      app: distcc
   template:
     metadata:
       labels:
-        app.k8s.io/name: distcc
+        app: distcc
     spec:
-      tolerations:
-      - key: node-role.kubernetes.io/master
-        operator: Exists
-        effect: NoSchedule
       containers:
-      - name: distcc
-        image: matthewzhaocc/distcc:latest
-        resources:
-          requests:
-            cpu: 100m
-            memory: 500Mi
-        ports:
-        - containerPort: 3632
-          hostPort: 3632
-          protocol: TCP
+        - image: >-
+            ai-search-registry-vpc.cn-shanghai.cr.aliyuncs.com/devops/distcc:latest
+          imagePullPolicy: Always
+          name: distcc
+          ports:
+            - containerPort: 3632
+              name: port
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+      imagePullSecrets:
+        - name: ai-search-hub
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: distcc-svc
+spec:
+  ports:
+    - name: distcc
+      nodePort: 30000
+      port: 3632
+      protocol: TCP
+      targetPort: 3632
+  selector:
+    app: distcc
+  type: NodePort

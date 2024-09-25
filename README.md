@@ -1,21 +1,40 @@
-# Building distcc with different compilers
-
-## Requirements:
-
-Docker 1.9.1
-
-## Build
-The following command will create three images based on Ubuntu 16.04 using gcc 4.8, 5.4 and clang 3.8 and
-build distcc inside the container.
+# 概述
+# 部署
+```shell
 
 ```
-$ cd docker
-$ ./build.sh
+
+# 客户端验证
+
+```shell
+# yum install distcc
+# cat a.cpp 
+#include <iostream>
+ 
+int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}
+
+# yum install gcc-c++
+# distcc g++ a.cpp 
+# ./a.out 
+Hello, World!
+
+
+export DISTCC_HOSTS="10.58.17.203:/64,lzo"
+export DISTCC_HOSTS="10.150.2.96:3000/32 10.150.1.137:3000/32 10.150.3.252:3000/32"
+export DISTCC_LOG=distcc.log
+export DISTCC_VERBOSE=1
+
+# distcc --show-hosts
+172.16.18.216/32
+
+# distccmon-text 1
+
+端口: 3632
 ```
 
-In order to build only one variant use the following command:
-
-```
-$ cd docker
-$ ./build.sh clang-3.8|gcc-4.8|gcc-5
-```
+> - 64表示：客户端发送到203这台机器的任务最多为64个，与cpu的core数量有关系
+> - lzo: 允许LZO压缩
+> - cpp: 使能distcc-pump mode,与pump mode 有关
