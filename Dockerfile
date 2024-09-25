@@ -7,6 +7,7 @@ RUN apt upgrade -y && \
     build-essential \
     apt-transport-https \
     wget \
+    autoconf \
     libiberty-dev \
     python3 \
     python3-pip && \
@@ -17,9 +18,12 @@ RUN wget https://github.com/distcc/distcc/releases/download/v3.4/distcc-3.4.tar.
 
 WORKDIR /distcc-3.4
 
-RUN ./configure && \
+RUN ./autogen.sh && \
+    ./configure && \
+    make clean && \
     make && \
-    make install
+    make install &&  \
+    make check
 
 RUN useradd distcc
 
