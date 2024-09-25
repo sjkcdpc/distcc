@@ -33,8 +33,47 @@ export DISTCC_VERBOSE=1
 # distccmon-text 1
 
 端口: 3632
+3633 web
+
+docker run -it -d -p 3632-3633:3632-3633 ai-search-registry.cn-shanghai.cr.aliyuncs.com/devops/distcc
+
+http://10.150.2.96:3633/
+argv /distccd
+<distccstats>
+dcc_tcp_accept 0
+dcc_rej_bad_req 0
+dcc_rej_overload 0
+dcc_compile_ok 0
+dcc_compile_error 0
+dcc_compile_timeout 0
+dcc_cli_disconnect 0
+dcc_other 0
+dcc_longest_job none
+dcc_longest_job_compiler none
+dcc_longest_job_time_msecs -1
+dcc_max_kids 6
+dcc_avg_kids1 0
+dcc_avg_kids2 0
+dcc_avg_kids3 0
+dcc_current_load 2
+dcc_load1 0.02
+dcc_load2 0.05
+dcc_load3 0.05
+dcc_num_compiles1 0
+dcc_num_compiles2 0
+dcc_num_compiles3 0
+dcc_num_procstate_D 0
+dcc_max_RSS 1884
+dcc_max_RSS_name (distccd)
+dcc_io_rate 0
+dcc_free_space 193078 MB
+</distccstats>
 ```
 
 > - 64表示：客户端发送到203这台机器的任务最多为64个，与cpu的core数量有关系
 > - lzo: 允许LZO压缩
 > - cpp: 使能distcc-pump mode,与pump mode 有关
+
+# 参考资料
+- https://hub.docker.com/r/ksmanis/gentoo-distcc
+- https://mp.weixin.qq.com/s/cwUFq9lcNtiWn_Ro_tw0fw
