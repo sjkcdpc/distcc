@@ -117,7 +117,8 @@ cmake \
 -DCMAKE_CXX_COMPILER_LAUNCHER=distcc \
 -DFORCE_INSOURCE_BUILD=1 \
 -DWITH_BOOST=boost_1_77_0
-make -j 64  # 64表示：客户端发送到203这台机器的任务最多为64个，与cpu的core数量有关系
+make -j 64  # 64表示：客户端发送到203这台机器的任务最多为64个，与cpu的core数量有关系 分布式编译这部分生效
+make install
 
 ```
 # 应用场景
