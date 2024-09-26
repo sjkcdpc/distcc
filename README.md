@@ -3,7 +3,7 @@
 
 # 部署
 ```shell
-
+kubectl apply -f deploy-daemonset.yaml
 ```
 
 # 客户端验证
