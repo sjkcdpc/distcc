@@ -116,13 +116,23 @@ cmake \
 -DWITH_LIBEVENT=bundled \
 -DWITH_ZSTD=bundled \
 -DENABLE_DOWNLOADS=ON \
--DCMAKE_C_COMPILER_LAUNCHER=distcc \
--DCMAKE_CXX_COMPILER_LAUNCHER=distcc \
+-DCMAKE_C_COMPILER_LAUNCHER='distcc' \
+-DCMAKE_CXX_COMPILER_LAUNCHER='distcc' \
 -DFORCE_INSOURCE_BUILD=1 \
 -DWITH_BOOST=boost_1_77_0
 make -j 64  # 64表示：客户端发送到203这台机器的任务最多为64个，与cpu的core数量有关系 分布式编译这部分生效
 make install
 
+```
+
+# 实战项目: 编译C++项目
+```shell
+export CC="ccache distcc gcc"
+export CXX="ccache distcc g++"
+export DISTCC_HOSTS="10.150.2.96:30000/32 10.150.1.137:30000/32 10.150.3.252:30000/32"
+export DISTCC_LOG=distcc.log
+export DISTCC_VERBOSE=1
+blade build general-rank/src/server
 ```
 # 应用场景
 - 适用于大型项目编译
