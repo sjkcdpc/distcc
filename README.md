@@ -102,6 +102,9 @@ tar -zxvf mysql-8.0.39.tar.gz
 cd mysql-8.0.39
 wget https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.gz/download
 tar -zxvf boost_1_77_0.tar.gz
+export DISTCC_HOSTS="10.150.2.96:30000/32 10.150.1.137:30000/32 10.150.3.252:30000/32"
+export DISTCC_LOG=distcc.log
+export DISTCC_VERBOSE=1
 cmake \
 -DBUILD_TESTING=OFF \
 -DUSE_GTAGS=OFF \
