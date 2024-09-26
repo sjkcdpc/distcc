@@ -25,7 +25,7 @@ Hello, World!
 
 
 export DISTCC_HOSTS="10.58.17.203:/64,lzo"
-export DISTCC_HOSTS="10.150.2.96:3000/32 10.150.1.137:3000/32 10.150.3.252:3000/32"
+export DISTCC_HOSTS="10.150.2.96:30000/32 10.150.1.137:30000/32 10.150.3.252:30000/32"
 export DISTCC_LOG=distcc.log
 export DISTCC_VERBOSE=1
 
@@ -76,6 +76,50 @@ dcc_free_space 193078 MB
 > - lzo: 允许LZO压缩
 > - cpp: 使能distcc-pump mode,与pump mode 有关
 
+# ccache
+```shell
+# yum install ccache
+# ccache -s
+Summary:
+  Hits:               0 /    0
+    Direct:           0 /    0
+    Preprocessed:     0 /    0
+  Misses:             0
+    Direct:           0
+    Preprocessed:     0
+Primary storage:
+  Hits:               0 /    0
+  Misses:             0
+  Cache size (GB): 0.00 / 5.00 (0.00 %)
+
+Use the -v/--verbose option for more details.
+```
+
+# 实战项目: 编译MySQL
+```shell
+wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.39.tar.gz
+tar -zxvf mysql-8.0.39.tar.gz
+cd mysql-8.0.39
+wget https://sourceforge.net/projects/boost/files/boost/1.77.0/boost_1_77_0.tar.gz/download
+tar -zxvf boost_1_77_0.tar.gz
+cmake \
+-DBUILD_TESTING=OFF \
+-DUSE_GTAGS=OFF \
+-DUSE_CTAGS=OFF \
+-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+-DFEATURE_SET=community \
+-DWITH_INNODB_MEMCACHED=ON \
+-DWITH_ZLIB=bundled \
+-DWITH_LIBEVENT=bundled \
+-DWITH_ZSTD=bundled \
+-DENABLE_DOWNLOADS=ON \
+-DCMAKE_C_COMPILER_LAUNCHER=distcc \
+-DCMAKE_CXX_COMPILER_LAUNCHER=distcc \
+-DFORCE_INSOURCE_BUILD=1 \
+-DWITH_BOOST=boost_1_77_0
+make -j 64  # 64表示：客户端发送到203这台机器的任务最多为64个，与cpu的core数量有关系
+
+```
 # 应用场景
 - 适用于大型项目编译
 
