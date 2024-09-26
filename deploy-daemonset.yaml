@@ -14,9 +14,7 @@ spec:
         app: distcc
     spec:
       containers:
-        - image: >-
-            ai-search-registry-vpc.cn-shanghai.cr.aliyuncs.com/devops/distcc:latest
-          imagePullPolicy: Always
+        - image: ai-search-registry-vpc.cn-shanghai.cr.aliyuncs.com/devops/distcc:latest
           name: distcc
           ports:
             - containerPort: 3632

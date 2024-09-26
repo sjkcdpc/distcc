@@ -88,3 +88,4 @@ dcc_free_space 193078 MB
 - https://hub.docker.com/r/ksmanis/gentoo-distcc
 - https://mp.weixin.qq.com/s/cwUFq9lcNtiWn_Ro_tw0fw
 - https://linux.die.net/man/1/distccd
+- https://ccache.dev/

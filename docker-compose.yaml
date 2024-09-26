@@ -3,9 +3,11 @@ version: '3'
 services:
   distcc:
     image: "ai-search-registry.cn-shanghai.cr.aliyuncs.com/devops/distcc"
+    platform: linux/amd64
     hostname: distcc
     container_name: distcc
     privileged: true
     ports:
-      - 3632:3632
-      - 3633:3633
+      - "3632:3632"
+      - "3633:3633"
+    restart: always
