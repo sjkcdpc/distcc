@@ -147,3 +147,5 @@ blade build general-rank/src/server
 - https://mp.weixin.qq.com/s/cwUFq9lcNtiWn_Ro_tw0fw
 - https://linux.die.net/man/1/distccd
 - https://ccache.dev/
+- https://github.com/icecc/icecream
+- https://github.com/mozilla/sccache
