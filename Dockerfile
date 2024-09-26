@@ -1,7 +1,7 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 RUN apt update && \
-    apt install -y net-tools distcc gcc g++ clang-12 && \
+    apt install -y net-tools distcc ccache gcc g++ clang-12 && \
     apt clean
 
 COPY entrypoint.sh /entrypoint.sh
